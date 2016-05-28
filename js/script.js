@@ -58,7 +58,7 @@ function getUniqueIndex(array, indexHistory) {
 	
 	// If the result is in the history, get a new number
 	while(indexHistory.indexOf(result) !== -1) {
-		result = getRandomIndexNumber(array);
+		return getUniqueIndex(array, indexHistory);
 	}
 	
 	// Add the result to the history
@@ -121,17 +121,19 @@ function printQuote() {
 	changeBackgroundColors();	
 }
 
-function changeBackgroundColors() {
-	// If the length of the history array and background colors array is the same, clear history
-	if (colorIndexHistoryArray.length === quotes.length) {
-		colorIndexHistoryArray = [];
-	}
-	
+function changeBackgroundColors() {		
 	// Create an array of color keywords
 	var backgroundColorsArray = ['rosybrown', 'burlywood', 'cadetblue', 'lightcoral', 'darkseagreen', 'thistle', 'salmon'];
 	
-	// Set the background color to a random color from the colors array
+	// Get a random color from the background colors array
 	var randomBackgroundColor = getUniqueIndex(backgroundColorsArray, colorIndexHistoryArray);
+	
+	// If the length of the history array and background colors array is the same, clear history
+	if (colorIndexHistoryArray.length === backgroundColorsArray.length) {
+		colorIndexHistoryArray = [];
+	}
+	
+	// Set the background color to a random color from the colors array
 	document.body.style.backgroundColor = backgroundColorsArray[randomBackgroundColor];
 	
 	// Also change the button background color
